@@ -14,11 +14,16 @@
  }
 
 
-.player-bar a,
-.player-bar a:hover {
+.player-bar a {
     color: white;
-    cursor: pointer;
     text-decoration: none;
+}
+
+.player-bar a:hover {
+    color: gray;
+    font-size: 1.8rem;
+    cursor: pointer;
+    text-shadow:2px 2px black ;
 }
 
 .player-bar .container {
@@ -46,6 +51,7 @@
 .player-bar .main-controls .play-pause {
     margin-right: 15%;
     font-size: 1.6rem;
+
 }
 
 .player-bar .currently-playing {
