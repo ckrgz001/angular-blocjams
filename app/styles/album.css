@@ -83,15 +83,6 @@
 
   /* Centered text looks better on smaller devices */
 
-
-
-
-
-
-
-
-
-
  @media (max-width: 640px) and (min-width: 320px) {
      .album-view-details {
          text-align: center;
@@ -109,4 +100,9 @@
         width: 80%;
         margin: auto;
     }
+}
+
+.album-song-button {
+    padding-top: 5px;
+    padding-left: 2px;
 }
