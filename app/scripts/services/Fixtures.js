@@ -35,9 +35,10 @@
 
          Fixtures.getAlbum = function() {
               return albumPicasso;
+              alert ('wtf');
           };
 
-          
+
          return Fixtures;
      }
 
