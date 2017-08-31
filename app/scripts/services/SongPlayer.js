@@ -31,19 +31,22 @@
                 currentSong = song;
             };
 
+            var playSong = function(song) {
+                    song.playing = true;
+                    currentBuzzObject.play();
+
+            };
+
 
         SongPlayer.play = function(song) {
               if (currentSong !== song) {
 
-
                 setSong(song);
-
-                currentBuzzObject.play();
-                song.playing = true;
+                playSong(song);
 
             } else if (currentSong === song) {
                     if (currentBuzzObject.isPaused()) {
-                        currentBuzzObject.play();
+                        playSong(song);
                     }
                 }
             };
