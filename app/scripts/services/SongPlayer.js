@@ -30,7 +30,9 @@
 
                 currentSong = song;
             };
-
+          /*@function playSong
+            @desc Plays currentBuzzObject
+            @param {Object} song */
             var playSong = function(song) {
                     song.playing = true;
                     currentBuzzObject.play();
