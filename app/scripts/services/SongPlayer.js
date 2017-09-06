@@ -43,12 +43,14 @@
             SongPlayer.currentSong = null;
 
 
+        /* @function play
+        @desc Play current or new song
+        @param {Object} song */
         SongPlayer.play = function(song) {
-              if (SongPlayer.currentSong !== song) {
-
+            song = song || SongPlayer.currentSong;
+            if (SongPlayer.currentSong !== song) {
                 setSong(song);
                 playSong(song);
-
             } else if (SongPlayer.currentSong === song) {
                     if (currentBuzzObject.isPaused()) {
                         playSong(song);
@@ -57,8 +59,9 @@
             };
 
         SongPlayer.pause = function(song) {
-                currentBuzzObject.pause();
-                song.playing = false;
+            song = song || SongPlayer.currentSong;
+            currentBuzzObject.pause();
+            song.playing = false;
             };
 
 
