@@ -40,6 +40,11 @@
 
             };
 
+            var stopSong = function () {
+                currentBuzzObject.stop();
+                song.playing = null;
+            };
+
             /*@function getSongIndex
               @desc gets the index of a song
               @param {song}
@@ -78,20 +83,40 @@
         //@function SongPlayer.previous
         //@desc takes currentSong and decrements by 1
         SongPlayer.previous = function() {
-         var currentSongIndex = getSongIndex(SongPlayer.currentSong);
-         currentSongIndex--;
+            var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+            currentSongIndex--;
+
          //If on first song and clicks previous button, stop currentSong & set value of current playing song to first song.
-         if (currentSongIndex < 0) {
-         currentBuzzObject.stop();
-         SongPlayer.currentSong.playing = null;
+            if (currentSongIndex < 0) {
+                currentBuzzObject.stop();
+                SongPlayer.currentSong.playing = null;
          //If the currentSongIndex is not less than zero, then it must be greater than zero
          //so the conditional moves to the previous song and automatically plays it
-        } else {
-            var song = currentAlbum.songs[currentSongIndex];
-            setSong(song);
-            playSong(song);
-        }
-     };
+            } else {
+                var song = currentAlbum.songs[currentSongIndex];
+                    setSong(song);
+                    playSong(song);
+                }
+            };
+
+            //@function SongPlayer.previous
+            //@desc takes currentSong and increments by 1
+        SongPlayer.next = function()    {
+            var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+            currentSongIndex++;
+
+            //If on last song and clicks next button, stop currentSong & set value of current playing song to zero.
+               if (currentSongIndex < 0) {
+                   currentBuzzObject.stop();
+                   SongPlayer.currentSong.playing = null;
+            //If the currentSongIndex is not less than zero, then it must be greater than zero
+            //so the conditional moves to the next song and automatically plays it
+            } else {
+                var song = currentAlbum.songs[currentSongIndex];
+                    setSong(song);
+                    playSong(song);
+                }
+            };
 
 
          return SongPlayer;
