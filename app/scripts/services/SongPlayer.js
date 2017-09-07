@@ -4,10 +4,12 @@
 //and two public methods: SongPlayer.play and SongPlayer.pause.
 
 (function() {
-     function SongPlayer() {
+     function SongPlayer(Fixtures) {
 
           var SongPlayer = {};
-
+          //@desc To move between songs, we need to know the index of the song object within the  songs array.
+          //To access the songs array, we need to store the album information
+          var currentAlbum = Fixtures.getAlbum();
 
           //@desc Buzz object audio file
           //@type {Object}
@@ -37,9 +39,18 @@
                     currentBuzzObject.play();
 
             };
+
+            /*@function getSongIndex
+              @desc gets the index of a song
+              @param {song}
+             */
+            var getSongIndex = function(song) {
+                return currentAlbum.songs.indexOf(song);
+            };
+
+
             //@desc Active song object from list of songs
             //@type {Object}
-
             SongPlayer.currentSong = null;
 
 
@@ -64,11 +75,29 @@
             song.playing = false;
             };
 
+        //@function SongPlayer.previous
+        //@desc takes currentSong and decrements by 1
+        SongPlayer.previous = function() {
+         var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+         currentSongIndex--;
+         //If on first song and clicks previous button, stop currentSong & set value of current playing song to first song.
+         if (currentSongIndex < 0) {
+         currentBuzzObject.stop();
+         SongPlayer.currentSong.playing = null;
+         //If the currentSongIndex is not less than zero, then it must be greater than zero
+         //so the conditional moves to the previous song and automatically plays it
+        } else {
+            var song = currentAlbum.songs[currentSongIndex];
+            setSong(song);
+            playSong(song);
+        }
+     };
+
 
          return SongPlayer;
      }
 
      angular
          .module('blocJams')
-         .factory('SongPlayer', SongPlayer);
+         .factory('SongPlayer',['Fixtures', SongPlayer]);
  })();
