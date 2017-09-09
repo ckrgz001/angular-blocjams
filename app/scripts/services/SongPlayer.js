@@ -4,7 +4,7 @@
 //and two public methods: SongPlayer.play and SongPlayer.pause.
 
 (function() {
-     function SongPlayer(Fixtures) {
+     function SongPlayer($rootScope, Fixtures) {
 
           var SongPlayer = {};
           //@desc To move between songs, we need to know the index of the song object within the  songs array.
@@ -28,6 +28,12 @@
                     formats: ['mp3'],
                     preload: true
                 });
+
+                currentBuzzObject.bind('timeupdate', function() {
+                    $rootScope.$apply(function() {
+                        SongPlayer.currentTime = currentBuzzObject.getTime();
+                    });
+                }); //Add the $apply to the SongPlayer.setSong method so that it starts "applying" the time update once we know which song to play
 
                 SongPlayer.currentSong = song;
             };
@@ -57,6 +63,10 @@
             //@desc Active song object from list of songs
             //@type {Object}
             SongPlayer.currentSong = null;
+
+            //* @desc Current playback time (in seconds) of currently playing song
+            //* @type {Number}
+            SongPlayer.currentTime = null;
 
 
         /* @function play
@@ -119,10 +129,19 @@
             };
 
 
+            // @function setCurrentTime
+            //@desc Set current time (in seconds) of currently playing song
+            //@param {Number} time
+        SongPlayer.setCurrentTime = function(time) {
+            if (currentBuzzObject) {
+                currentBuzzObject.setTime(time);
+         }
+     };
+
          return SongPlayer;
      }
 
      angular
          .module('blocJams')
-         .factory('SongPlayer',['Fixtures', SongPlayer]);
+         .factory('SongPlayer',['$rootScope','Fixtures', SongPlayer]);
  })();
