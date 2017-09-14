@@ -119,6 +119,9 @@
             var currentSongIndex = getSongIndex(SongPlayer.currentSong);
             currentSongIndex++;
 
+                if (currentSongIndex == currentAlbum.songs.length){
+                    currentSongIndex = 0;
+                }
             //If on last song and clicks next button, stop currentSong & set value of current playing song to zero.
                if (currentSongIndex < 0) {
                    currentBuzzObject.stop();
