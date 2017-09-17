@@ -152,6 +152,21 @@
             SongPlayer.volume = volume;
             };
 
+        SongPlayer.mute = function () {
+            if (currentBuzzObject) {
+                currentBuzzObject.mute();
+            }
+            SongPlayer.volume = 0;
+        };
+
+        SongPlayer.unmute = function() {
+            if (currentBuzzObject.isMuted()) {
+                currentBuzzObject.unmute();
+                
+            }
+            SongPlayer.volume = 80;
+        }
+
          return SongPlayer;
      };
 
