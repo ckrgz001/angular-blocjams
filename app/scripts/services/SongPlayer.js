@@ -73,6 +73,7 @@
             SongPlayer.volume = 80;
 
 
+
         /* @function play
         @desc Play current or new song
         @param {Object} song */
@@ -155,6 +156,7 @@
         SongPlayer.mute = function () {
             if (currentBuzzObject) {
                 currentBuzzObject.mute();
+                
             }
             SongPlayer.volume = 0;
         };
@@ -162,7 +164,7 @@
         SongPlayer.unmute = function() {
             if (currentBuzzObject.isMuted()) {
                 currentBuzzObject.unmute();
-                
+
             }
             SongPlayer.volume = 80;
         }
