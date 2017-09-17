@@ -31,13 +31,13 @@
         <div class="control-group volume">
             <a class ="mute">
                 <span class="icon ion-volume-high"
-
+                ng-show= "!playerBar.songPlayer.isMuted"
                 ng-click="playerBar.songPlayer.mute()">
                 </span>
             </a>
             <a class ="unmute">
                 <span class="icon ion-volume-mute"
-                
+                ng-show= "playerBar.songPlayer.isMuted"
                 ng-click="playerBar.songPlayer.unmute()">
                 </span>
             </a>

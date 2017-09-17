@@ -72,6 +72,8 @@
             //@type {Number}
             SongPlayer.volume = 80;
 
+            SongPlayer.isMuted = false;
+
 
 
         /* @function play
@@ -156,18 +158,18 @@
         SongPlayer.mute = function () {
             if (currentBuzzObject) {
                 currentBuzzObject.mute();
-                
             }
             SongPlayer.volume = 0;
+            SongPlayer.isMuted = true;
         };
 
         SongPlayer.unmute = function() {
             if (currentBuzzObject.isMuted()) {
                 currentBuzzObject.unmute();
-
             }
+            SongPlayer.isMuted = false;
             SongPlayer.volume = 80;
-        }
+        };
 
          return SongPlayer;
      };
