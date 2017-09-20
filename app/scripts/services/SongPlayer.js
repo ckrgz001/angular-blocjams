@@ -35,6 +35,12 @@
                     });
                 }); //Add the $apply to the SongPlayer.setSong method so that it starts "applying" the time update once we know which song to play
 
+
+                currentBuzzObject.bind('ended', function() {
+                    SongPlayer.next();
+                });
+
+
                 SongPlayer.currentSong = song;
             };
           /*@function playSong
@@ -74,6 +80,8 @@
 
             SongPlayer.isMuted = false;
 
+            SongPlayer.previousVolume = 80;
+
 
 
         /* @function play
@@ -89,6 +97,10 @@
                         playSong(song);
                     }
                 }
+            /*else (currentBuzzObject.isEnded()) {
+                SongPlayer.next();
+                alert ("what");
+            }*/
             };
 
         SongPlayer.pause = function(song) {
@@ -156,11 +168,13 @@
             };
 
         SongPlayer.mute = function () {
+            SongPlayer.previousVolume = SongPlayer.volume;
             if (currentBuzzObject) {
                 currentBuzzObject.mute();
             }
-            SongPlayer.volume = 0;
+
             SongPlayer.isMuted = true;
+            SongPlayer.volume = 0;
         };
 
         SongPlayer.unmute = function() {
@@ -168,7 +182,9 @@
                 currentBuzzObject.unmute();
             }
             SongPlayer.isMuted = false;
-            SongPlayer.volume = 80;
+            SongPlayer.volume = SongPlayer.previousVolume;
+
+
         };
 
          return SongPlayer;
